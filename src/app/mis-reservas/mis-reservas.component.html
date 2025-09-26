@@ -1,0 +1,60 @@
+<div class="mis-reservas">
+  <div class="page-header">
+    <h1>Mis Reservas</h1>
+    <p>Gestiona tus reservaciones actuales</p>
+  </div>
+
+  <div *ngIf="misReservas.length === 0" class="empty-state">
+    <div class="empty-icon">📅</div>
+    <h3>No tienes reservas activas</h3>
+    <p>Cuando hagas una reserva, aparecerá aquí para que puedas gestionarla.</p>
+  </div>
+
+  <div class="reservas-grid" *ngIf="misReservas.length > 0">
+    <div *ngFor="let reserva of misReservas" 
+         class="reserva-card"
+         [ngClass]="reserva.estado">
+      <div class="card-header">
+        <h3>{{reserva.nombre}}</h3>
+        <span class="tipo-badge" [ngClass]="reserva.tipo">
+          {{reserva.tipo}}
+        </span>
+      </div>
+      
+      <div class="card-body">
+        <div class="reserva-details">
+          <div class="detail-item">
+            <span class="detail-label">Estado:</span>
+            <span class="estado-badge" [ngClass]="reserva.estado">
+              <span class="status-icon" [ngClass]="getStatusIcon(reserva.estado)"></span>
+              {{reserva.estado | titlecase}}
+            </span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Fecha de reserva:</span>
+            <span class="detail-value">{{fechaActual}}</span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Usuario:</span>
+            <span class="detail-value">{{usuarioActual}}</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card-footer">
+        <div class="button-group">
+          <button class="btn btn-warning" (click)="editarReserva(reserva)">
+            <span class="btn-icon">✏️</span>
+            Editar
+          </button>
+          <button class="btn btn-danger" (click)="cancelarReserva(reserva.id)">
+            <span class="btn-icon">🗑️</span>
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

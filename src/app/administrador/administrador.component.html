@@ -1,0 +1,157 @@
+<div class="administrador">
+  <div class="page-header">
+    <h1>Panel de Administrador</h1>
+    <p>Gestiona todas las reservas del sistema</p>
+  </div>
+
+  <!-- Formulario para agregar nueva reserva -->
+  <div class="form-card">
+    <div class="form-header">
+      <h2>📝 Agregar Nueva Reserva</h2>
+    </div>
+    <form class="form-content">
+      <div class="form-group">
+        <label for="nombre">Nombre del espacio</label>
+        <input 
+          id="nombre"
+          type="text"
+          [(ngModel)]="nuevaReserva.nombre" 
+          placeholder="Ej. Aula 101, Lab de Química"
+          class="form-control"
+          name="nombre"
+        />
+      </div>
+      
+      <div class="form-group">
+        <label for="tipo">Tipo de espacio</label>
+        <select id="tipo" [(ngModel)]="nuevaReserva.tipo" class="form-control" name="tipo">
+          <option value="">Seleccionar tipo</option>
+          <option value="aula">Aula</option>
+          <option value="laboratorio">Laboratorio</option>
+          <option value="auditorio">Auditorio</option>
+        </select>
+      </div>
+      
+      <button type="button" (click)="agregarReserva()" class="btn btn-primary">
+        <span class="btn-icon">➕</span>
+        Agregar Reserva
+      </button>
+    </form>
+  </div>
+
+  <!-- Lista de reservas -->
+  <div class="reservas-section">
+    <div class="section-header">
+      <h2>🏢 Todas las Reservas</h2>
+      <div class="stats-summary">
+        <span class="stat-item">
+          <span class="stat-number">{{reservas.length}}</span>
+          <span class="stat-label">Total</span>
+        </span>
+        <span class="stat-item">
+          <span class="stat-number">{{getReservasPorEstado('disponible').length}}</span>
+          <span class="stat-label">Disponibles</span>
+        </span>
+        <span class="stat-item">
+          <span class="stat-number">{{getReservasPorEstado('reservado').length}}</span>
+          <span class="stat-label">Reservadas</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="reservas-grid" *ngIf="reservas.length > 0">
+      <div *ngFor="let reserva of reservas" 
+           class="admin-card"
+           [ngClass]="reserva.estado">
+        <div class="card-header">
+          <div class="card-title">
+            <h3 *ngIf="editForm?.id !== reserva.id">{{reserva.nombre}}</h3>
+            <input 
+              *ngIf="editForm?.id === reserva.id"
+              [(ngModel)]="editForm!.nombre" 
+              class="edit-input"
+            />
+            <span class="tipo-badge" [ngClass]="editForm?.id === reserva.id ? editForm!.tipo : reserva.tipo">
+              <span *ngIf="editForm?.id !== reserva.id">{{reserva.tipo | titlecase}}</span>
+              <select *ngIf="editForm?.id === reserva.id" [(ngModel)]="editForm!.tipo" class="edit-select">
+                <option value="aula">Aula</option>
+                <option value="laboratorio">Laboratorio</option>
+                <option value="auditorio">Auditorio</option>
+              </select>
+            </span>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <div class="estado-section">
+            <span class="estado-label">Estado:</span>
+            <span 
+              *ngIf="editForm?.id !== reserva.id"
+              class="estado-badge" 
+              [ngClass]="reserva.estado"
+            >
+              <span class="status-icon" [ngClass]="getStatusIcon(reserva.estado)"></span>
+              {{reserva.estado | titlecase}}
+            </span>
+            <select 
+              *ngIf="editForm?.id === reserva.id" 
+              [(ngModel)]="editForm!.estado" 
+              class="edit-select estado-select"
+            >
+              <option value="disponible">Disponible</option>
+              <option value="ocupado">Ocupado</option>
+              <option value="reservado">Reservado</option>
+            </select>
+          </div>
+          
+          <div class="reserva-id">
+            <span class="id-label">ID:</span>
+            <span class="id-value">#{{reserva.id}}</span>
+          </div>
+        </div>
+        
+        <div class="card-footer">
+          <div class="button-group" *ngIf="editForm?.id !== reserva.id">
+            <button 
+              (click)="editarReserva(reserva)" 
+              class="btn btn-warning btn-sm"
+            >
+              <span class="btn-icon">✏️</span>
+              Editar
+            </button>
+            <button 
+              (click)="eliminarReserva(reserva.id)" 
+              class="btn btn-danger btn-sm"
+            >
+              <span class="btn-icon">🗑️</span>
+              Eliminar
+            </button>
+          </div>
+          
+          <div class="button-group" *ngIf="editForm?.id === reserva.id">
+            <button 
+              (click)="guardarEdicion()" 
+              class="btn btn-success btn-sm"
+            >
+              <span class="btn-icon">💾</span>
+              Guardar
+            </button>
+            <button 
+              (click)="cancelarEdicion()" 
+              class="btn btn-secondary btn-sm"
+            >
+              <span class="btn-icon">❌</span>
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="reservas.length === 0" class="empty-state">
+      <div class="empty-icon">📋</div>
+      <h3>No hay reservas registradas</h3>
+      <p>Agrega la primera reserva usando el formulario de arriba.</p>
+    </div>
+  </div>
+</div>

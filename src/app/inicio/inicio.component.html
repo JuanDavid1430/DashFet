@@ -1,0 +1,47 @@
+<div class="inicio fade-in">
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Bienvenido a DashFet</h1>
+      <p class="hero-subtitle">Sistema de reservas de aulas y laboratorios</p>
+      <div class="hero-buttons">
+        <a routerLink="/reservas" class="btn-primary">Ver Reservas</a>
+        <a routerLink="/mis-reservas" class="btn-secondary">Mis Reservas</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-number">{{ totalReservas }}</div>
+        <div class="stat-label">Total Espacios</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">{{ disponibles }}</div>
+        <div class="stat-label">Disponibles</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">{{ reservados }}</div>
+        <div class="stat-label">Reservados</div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="features-section">
+    <h2>Características del Sistema</h2>
+    <div class="features-grid">
+      <div class="feature-card slide-in">
+        <div class="feature-icon">🏢</div>
+        <h3>Gestión de Espacios</h3>
+        <p>Administra aulas, laboratorios y auditorios de manera eficiente</p>
+      </div>
+      <div class="feature-card slide-in">
+        <div class="feature-icon">📅</div>
+        <h3>Reservas Fáciles</h3>
+        <p>Sistema intuitivo para realizar reservas rápidamente</p>
+      </div>
+      <div class="feature-card slide-in">
+        <div class="feature-icon">👨‍💼</div>
+        <h3>Panel Administrativo</h3>
+        <p>Herramientas completas para administradores</p>
+      </div>
+    </div>
+  </div>
+</div>

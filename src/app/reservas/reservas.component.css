@@ -1,0 +1,251 @@
+.reservas {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-green-dark);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.page-header p {
+  font-size: 1.1rem;
+  color: var(--secondary-green);
+}
+
+.reservas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.reserva-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: var(--transition);
+  border-top: 4px solid var(--primary-green);
+}
+
+.reserva-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.reserva-card.disponible {
+  border-top-color: var(--success);
+}
+
+.reserva-card.ocupado {
+  border-top-color: var(--danger);
+}
+
+.reserva-card.reservado {
+  border-top-color: var(--warning);
+}
+
+.card-header {
+  padding: 1.5rem 1.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-header h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-green-dark);
+  margin: 0;
+}
+
+.tipo-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tipo-badge.aula {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  color: #1976d2;
+}
+
+.tipo-badge.laboratorio {
+  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+  color: #7b1fa2;
+}
+
+.tipo-badge.auditorio {
+  background: linear-gradient(135deg, #fff3e0, #ffcc02);
+  color: #f57c00;
+}
+
+.card-body {
+  padding: 0 1.5rem 1rem;
+}
+
+.estado-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.estado-label {
+  font-weight: 500;
+  color: var(--secondary-green);
+}
+
+.estado-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.estado-badge.disponible {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  color: var(--success);
+}
+
+.estado-badge.ocupado {
+  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+  color: var(--danger);
+}
+
+.estado-badge.reservado {
+  background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+  color: #856404;
+}
+
+.status-icon::before {
+  font-size: 0.8rem;
+}
+
+.status-icon.available::before {
+  content: '✅';
+}
+
+.status-icon.occupied::before {
+  content: '❌';
+}
+
+.status-icon.reserved::before {
+  content: '⏰';
+}
+
+.card-footer {
+  padding: 1rem 1.5rem 1.5rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.btn-reservar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--success) 0%, #20c997 100%);
+  color: var(--white);
+  border: none;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-reservar:hover {
+  background: linear-gradient(135deg, #1e7e34 0%, var(--success) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.no-disponible {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--gray-200);
+  color: var(--secondary-green);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--secondary-green);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-green-dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reservas {
+    padding: 1rem;
+  }
+  
+  .reservas-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .page-header h1 {
+    font-size: 2rem;
+  }
+  
+  .card-header {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .card-body, .card-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .reserva-card {
+    margin: 0 -0.5rem;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="reservas fade-in">
+  <div class="page-header">
+    <h1>Reservas Disponibles</h1>
+    <p>Encuentra y reserva el espacio perfecto para tus actividades</p>
+  </div>
+  
+  <div class="reservas-grid">
+    <div *ngFor="let reserva of reservas" class="reserva-card" [ngClass]="reserva.estado.toLowerCase()">
+      <div class="card-header">
+        <h3>{{ reserva.nombre }}</h3>
+        <span class="tipo-badge" [ngClass]="reserva.tipo.toLowerCase()">{{ reserva.tipo }}</span>
+      </div>
+      <div class="card-body">
+        <div class="estado-info">
+          <span class="estado-label">Estado:</span>
+          <span class="estado-badge" [ngClass]="reserva.estado.toLowerCase()">
+            <i class="status-icon" [ngClass]="{
+              'available': reserva.estado === 'Disponible',
+              'occupied': reserva.estado === 'Ocupado',
+              'reserved': reserva.estado === 'Reservado'
+            }"></i>
+            {{ reserva.estado }}
+          </span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button 
+          *ngIf="reserva.estado === 'Disponible'" 
+          (click)="reservar(reserva)" 
+          class="btn-reservar">
+          <i class="btn-icon">📅</i>
+          Reservar
+        </button>
+        <span *ngIf="reserva.estado !== 'Disponible'" class="no-disponible">
+          <i class="btn-icon">🚫</i>
+          No disponible
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="reservas.length === 0" class="empty-state">
+    <div class="empty-icon">📋</div>
+    <h3>No hay espacios registrados</h3>
+    <p>Contacta al administrador para agregar espacios</p>
+  </div>
+</div>
